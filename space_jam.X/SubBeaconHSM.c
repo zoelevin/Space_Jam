@@ -94,11 +94,10 @@ uint8_t InitBeaconSubHSM(void) {
  * @Function RunBeaconSubHSM(ES_Event ThisEvent)
  * @param ThisEvent - the event (type and param) to be responded.
  * @return Event - return event (type and param), in general should be ES_NO_EVENT
- * @brief This function is where the whole of the hierarchical state
- *        machine is implemented, as this is called any time a new event is passed to the event
- *        queue. This function will be called recursively to implement the correct
- *        order for a state transition to be: exit current state -> enter next state
- *        using the ES_EXIT and ES_ENTRY events.
+ * @brief This function controls the beacon orientation state machine of the spacejam 
+ * robot. It orients the beacon detector to find the beacon then activates 
+ * the flywheel and loading actuator to load a ping pong ball in the barrel
+ * and shoot it.
  * @note 
  *       The lower level state machines are run first, to see if the event is dealt
  *       with there rather than at the current level. ES_EXIT and ES_ENTRY events are
