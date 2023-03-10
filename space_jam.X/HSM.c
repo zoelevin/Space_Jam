@@ -77,10 +77,10 @@ static uint8_t MyPriority;
  * @return TRUE or FALSE
  * @brief This will get called by the framework at the beginning of the code
  *        execution. It will post an ES_INIT event to the appropriate event
- *        queue, which will be handled inside RunTemplateFSM function. Remember
+ *        queue, which will be handled inside RunHSM function. Remember
  *        to rename this to something appropriate.
  *        Returns TRUE if successful, FALSE otherwise
- * @author J. Edward Carryer, 2011.10.23 19:25 */
+ * @author Demetrius Rauck, J. Edward Carryer */
 uint8_t Init_SPACE_JAM_HSM(uint8_t Priority) {
     MyPriority = Priority;
     // put us into the Initial PseudoState
@@ -99,7 +99,7 @@ uint8_t Init_SPACE_JAM_HSM(uint8_t Priority) {
  * @return TRUE or FALSE
  * @brief This function is a wrapper to the queue posting function, and its name
  *        will be used inside ES_Configure to point to which queue events should
- *        be posted to. Remember to rename to something appropriate.
+ *        be posted to. 
  *        Returns TRUE if successful, FALSE otherwise
  * @author J. Edward Carryer, 2011.10.23 19:25 */
 uint8_t Post_SPACE_JAM_HSM(ES_Event ThisEvent) {

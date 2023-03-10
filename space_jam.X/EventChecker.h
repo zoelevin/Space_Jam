@@ -17,34 +17,32 @@
 
 #include "ES_Configure.h"   
 #include "BOARD.h"
-
-
 /*******************************************************************************
  * PUBLIC FUNCTION PROTOTYPES                                                  *
  ******************************************************************************/
 
 /**
- * @Function IR_L_Sensing(void)
+ * @Function IR_R_Sensing(void)
  * @param none
  * @return TRUE or FALSE
- * @brief This function is an event checker that checks the bottom and top left
+ * @brief This function is an event checker that checks the bottom and top right
  *      active low IR sensor output voltages against two fixed thresholds 
  *      (#defined in the .c file). This function implements hysteresis to 
  *      prevent rapid switching between high and low voltage states. The 
- *      function will post an event IR_L_SWEETSPOT, IR_L_TOO_CLOSE, IR_L_TOO_FAR
+ *      function will post an event IR_R_SWEETSPOT, IR_R_TOO_CLOSE, IR_R_TOO_FAR
  *      based on the chart below
  *                  INPUT           |                |
  *        --------------------------|     OUTPUT     |
  *        FAR_SENSOR | CLOSE_SENSOR |                |
  *        --------------------------|----------------|
- *         LOW       |    LOW       | IR_L_TOO_CLOSE |
- *         LOW       |    HIGH      | IR_L_SWEETSPOT |
- *         HIGH      |    HIGH      | IR_L_TOO_FAR   |
+ *         LOW       |    LOW       | IR_R_TOO_CLOSE |
+ *         LOW       |    HIGH      | IR_R_SWEETSPOT |
+ *         HIGH      |    HIGH      | IR_R_TOO_FAR   |
  *              
  *        Returns TRUE if there was an event, FALSE otherwise.
  * @note 
  * @author Zoe Levin */
-uint8_t IR_L_Sensing(void);
+uint8_t IR_R_Sensing(void);
 
 /**
  * @Function IR_F_Sensing(void)

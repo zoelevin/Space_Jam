@@ -57,44 +57,44 @@ static ES_Event storedEvent;
  ******************************************************************************/
 
 static enum {
-    CLOSE_L, FAR_L, SWEETSPOT_L
-} lastIR_L_State = CLOSE_L;
+    CLOSE_R, FAR_R, SWEETSPOT_R
+} lastIR_R_State = CLOSE_R;
 
-uint8_t IR_L_Sensing(void) {
+uint8_t IR_R_Sensing(void) {
 
     enum {
-        CLOSE_L, FAR_L, SWEETSPOT_L
-    } currentIR_L_State;
+        CLOSE_R, FAR_R, SWEETSPOT_R
+    } currentIR_R_State;
 
-    uint16_t currentIR_L_SWEETSPOT_Value;
-    uint16_t currentIR_L_TOO_CLOSE_Value;
+    uint16_t currentIR_R_SWEETSPOT_Value;
+    uint16_t currentIR_R_TOO_CLOSE_Value;
     uint8_t returnVal = FALSE;
     ES_Event ThisEvent;
     ES_EventTyp_t curEvent;
 
     //GET AD VALUE OF IR SENSORS 
-    currentIR_L_SWEETSPOT_Value = AD_ReadADPin(AD_PORTW3);
-    currentIR_L_TOO_CLOSE_Value = AD_ReadADPin(AD_PORTW4);
+    currentIR_R_SWEETSPOT_Value = AD_ReadADPin(AD_PORTW3);
+    currentIR_R_TOO_CLOSE_Value = AD_ReadADPin(AD_PORTW4);
 
     //EVENT DETECTION
-    if ((currentIR_L_SWEETSPOT_Value < IR_THRESHOLD) &&
-            (currentIR_L_TOO_CLOSE_Value >= IR_THRESHOLD)) {
-        currentIR_L_State = SWEETSPOT_L;
-        curEvent = IR_L_SWEETSPOT;
-    } else if ((currentIR_L_SWEETSPOT_Value < IR_THRESHOLD) &&
-            (currentIR_L_TOO_CLOSE_Value < IR_THRESHOLD)) {
-        currentIR_L_State = CLOSE_L;
-        curEvent = IR_L_TOO_CLOSE;
-    } else if ((currentIR_L_SWEETSPOT_Value >= IR_THRESHOLD) &&
-            (currentIR_L_TOO_CLOSE_Value >= IR_THRESHOLD)) {
-        currentIR_L_State = FAR_L;
-        curEvent = IR_L_TOO_FAR;
+    if ((currentIR_R_SWEETSPOT_Value < IR_THRESHOLD) &&
+            (currentIR_R_TOO_CLOSE_Value >= IR_THRESHOLD)) {
+        currentIR_R_State = SWEETSPOT_R;
+        curEvent = IR_R_SWEETSPOT;
+    } else if ((currentIR_R_SWEETSPOT_Value < IR_THRESHOLD) &&
+            (currentIR_R_TOO_CLOSE_Value < IR_THRESHOLD)) {
+        currentIR_R_State = CLOSE_R;
+        curEvent = IR_R_TOO_CLOSE;
+    } else if ((currentIR_R_SWEETSPOT_Value >= IR_THRESHOLD) &&
+            (currentIR_R_TOO_CLOSE_Value >= IR_THRESHOLD)) {
+        currentIR_R_State = FAR_R;
+        curEvent = IR_R_TOO_FAR;
     }
     //EVENT DETECTED
-    if (currentIR_L_State != lastIR_L_State) {
+    if (currentIR_R_State != lastIR_R_State) {
         ThisEvent.EventType = curEvent;
         returnVal = TRUE;
-        lastIR_L_State = currentIR_L_State;
+        lastIR_R_State = currentIR_R_State;
 #ifndef EVENTCHECKER_TEST   
         //POST TO SERVICE
         Post_SPACE_JAM_HSM(ThisEvent);
